@@ -21,7 +21,13 @@ func main() {
 		ctx.JSON(http.StatusOK, "pong")
 	})
 
+	g.POST("/register", api.Register)
+	g.POST("/login", api.Login)
+
 	g.POST("/sepulca", api.CreateSepulca)
+	g.GET("/grimziks", api.GetGrimziks)
+	g.PUT("/sepulca/vaccinate", api.VaccinateSepulca)
+	g.PUT("/sepulca/rubber", api.RubberSepulca)
 
 	if err := g.Run(":8080"); err != nil {
 		log.Panic(err)
