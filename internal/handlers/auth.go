@@ -19,6 +19,7 @@ func (a *Api) Register(ctx *gin.Context) {
 		a.processDb500(ctx)
 		return
 	}
+	ctx.JSON(http.StatusCreated, nil)
 }
 
 func (a *Api) Login(ctx *gin.Context) {

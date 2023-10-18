@@ -31,14 +31,14 @@ func (db *Db) Register(user models.User) error {
 
 func (db *Db) Login(user models.User) (*models.UserWithoutPassword, error) {
 	const query = `
-		SELECT (username, password, role_id) 
+		SELECT role_id, username, password
 		FROM registred_users
 				WHERE username=$1
 			
 	`
-
+	username := user.Username
 	var dbData models.User
-	err := db.db.Get(&dbData, query, user.UserName)
+	err := db.db.Get(&dbData, query, username)
 	if err != nil {
 		return nil, err
 	}
@@ -48,7 +48,7 @@ func (db *Db) Login(user models.User) (*models.UserWithoutPassword, error) {
 	}
 
 	return &models.UserWithoutPassword{
-		UserName: dbData.UserName,
+		UserName: dbData.Username,
 		RoleID:   dbData.RoleID,
 	}, nil
 }

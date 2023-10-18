@@ -5,7 +5,7 @@ import "github.com/sepulCOmpany/backend/internal/models"
 func (db *Db) GetAllGrimziks() ([]models.UserWithoutPassword, error) {
 	const (
 		query = `
-			SELECT (username, role_id) 
+			SELECT username, role_id
 			FROM registred_users
 				WHERE role_id=2
 `
