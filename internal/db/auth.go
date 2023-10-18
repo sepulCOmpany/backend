@@ -21,8 +21,8 @@ func (db *Db) Register(user models.User) error {
 
 	const query = `
 		INSERT INTO 
-		    registred_users (login, password, role_id)
-			VALUES (:login, :password, :role_id)
+		    registred_users (username, password, role_id)
+			VALUES (:username, :password, :role_id)
 	`
 
 	_, err = db.db.NamedExec(query, user)
@@ -33,7 +33,7 @@ func (db *Db) Login(user models.User) (*models.UserWithoutPassword, error) {
 	const query = `
 		SELECT (username, password, role_id) 
 		FROM registred_users
-				WHERE user=$1
+				WHERE username=$1
 			
 	`
 
