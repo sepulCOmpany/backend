@@ -4,15 +4,16 @@ import "github.com/sepulCOmpany/backend/internal/models"
 
 func (db *Db) GetAllGrimziks() ([]models.UserWithoutPassword, error) {
 	const (
-		query = `
+		grimzikRoleID = 2
+		query         = `
 			SELECT username, role_id
 			FROM registred_users
-				WHERE role_id=2
+				WHERE role_id=$1
 `
 	)
 
 	var grimziks []models.UserWithoutPassword
-	err := db.db.Get(&grimziks, query)
+	err := db.db.Select(&grimziks, query, grimzikRoleID)
 	if err != nil {
 		return nil, err
 	}

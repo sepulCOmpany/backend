@@ -60,6 +60,10 @@ func (a *Api) RubberSepulca(ctx *gin.Context) {
 	a.process204(ctx)
 }
 
+func (a *Api) ChangeDeliveryState(ctx *gin.Context) {
+
+}
+
 func (a *Api) GetAllSepulcas(ctx *gin.Context) {
 	// прописать явно всю хуйню
 }
