@@ -1,6 +1,7 @@
 package models
 
 type User struct {
+	ID       int64  `json:"id" db:"id"`
 	Username string `json:"username" db:"username"`
 	Password string `json:"password" db:"password"`
 	RoleID   int64  `json:"roleId" db:"role_id"`
@@ -8,7 +9,7 @@ type User struct {
 
 type UserWithoutPassword struct {
 	ID       int64  `json:"id" db:"id"`
-	UserName string `json:"username" db:"username"`
+	Username string `json:"username" db:"username"`
 	RoleID   int64  `json:"roleId" db:"role_id"`
 }
 

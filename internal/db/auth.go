@@ -43,7 +43,7 @@ func (db *Db) Register(user models.User) (*models.UserWithoutPassword, error) {
 
 func (db *Db) Login(user models.User) (*models.UserWithoutPassword, error) {
 	const query = `
-		SELECT role_id, username, password
+		SELECT role_id, username, password, id
 		FROM registred_users
 				WHERE username=$1
 			
@@ -60,7 +60,8 @@ func (db *Db) Login(user models.User) (*models.UserWithoutPassword, error) {
 	}
 
 	return &models.UserWithoutPassword{
-		UserName: dbData.Username,
+		Username: dbData.Username,
 		RoleID:   dbData.RoleID,
+		ID:       dbData.ID,
 	}, nil
 }

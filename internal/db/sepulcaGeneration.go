@@ -6,7 +6,7 @@ func (db *Db) GetAllGrimziks() ([]models.UserWithoutPassword, error) {
 	const (
 		grimzikRoleID = 2
 		query         = `
-			SELECT username, role_id
+			SELECT username, role_id, id
 			FROM registred_users
 				WHERE role_id=$1
 `
