@@ -83,14 +83,14 @@ func (a *Api) GetAllSepulcas(ctx *gin.Context) {
 
 	type resp struct {
 		models.Sepulca
-		Shmudrik models.UserWithoutPassword `json:"shmudrik"`
+		Shmurdik models.UserWithoutPassword `json:"shmurdik"`
 		Grimzik  models.UserWithoutPassword `json:"grimzik"`
 	}
 	response := make([]resp, 0, len(dbData))
 	for i := range dbData {
 		response = append(response, resp{
 			Sepulca: dbData[i],
-			Shmudrik: models.UserWithoutPassword{
+			Shmurdik: models.UserWithoutPassword{
 				ID:       dbData[i].ShmurdikID,
 				Username: dbData[i].Shmurdik,
 			},
