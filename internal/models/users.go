@@ -23,5 +23,5 @@ type Sepulca struct {
 	IsRubbered        *bool  `json:"isRubbered" db:"is_rubbered"`
 	DeliveryStateID   int64  `json:"deliveryStateId" db:"delivery_state_id"`
 	Shmurdik          string `json:"shmurdik_username" db:"shmurdik_username"`
-	Grimzik           string `json:"grimzik_username" db:"shmurdik_username"`
+	Grimzik           string `json:"grimzik_username" db:"grimzik_username"`
 }
