@@ -18,7 +18,7 @@ type Sepulca struct {
 	SizeID            int64  `json:"sizeId" db:"size_id" binding:"required"`
 	ShmurdikID        int64  `json:"shmurdikId" db:"shmurdik_id" binding:"required"`
 	GrimzikID         int64  `json:"grimzik_id" db:"grimzik_id" binding:"required"`
-	SepulcaPropertyID int64  `json:"sepulcaProperty" db:"property_id" binding:"required"`
+	SepulcaPropertyID int64  `json:"sepulcaPropertyId" db:"property_id" binding:"required"`
 	IsVaccinated      *bool  `json:"isVaccinated" db:"is_vaccinated"`
 	IsRubbered        *bool  `json:"isRubbered" db:"is_rubbered"`
 	DeliveryStateID   int64  `json:"deliveryStateId" db:"delivery_state_id"`
