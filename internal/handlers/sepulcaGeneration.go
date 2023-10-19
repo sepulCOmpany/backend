@@ -61,9 +61,25 @@ func (a *Api) RubberSepulca(ctx *gin.Context) {
 }
 
 func (a *Api) ChangeDeliveryState(ctx *gin.Context) {
-
+	var body models.Sepulca
+	if err := ctx.BindJSON(&body); err != nil {
+		a.process422(ctx)
+		return
+	}
+	err := a.dbConn.SetDeliveryState(body)
+	if err != nil {
+		a.processDb500(ctx)
+		return
+	}
+	a.process204(ctx)
 }
 
 func (a *Api) GetAllSepulcas(ctx *gin.Context) {
-	// прописать явно всю хуйню
+	dbData, err := a.dbConn.GetAllSepulcas()
+	if err != nil {
+		a.processDb500(ctx)
+		return
+	}
+
+	ctx.JSON(http.StatusOK, dbData)
 }

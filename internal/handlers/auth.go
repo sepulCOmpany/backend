@@ -14,12 +14,13 @@ func (a *Api) Register(ctx *gin.Context) {
 		return
 	}
 
-	err := a.dbConn.Register(body)
+	dbData, err := a.dbConn.Register(body)
 	if err != nil {
 		a.processDb500(ctx)
 		return
 	}
-	ctx.JSON(http.StatusCreated, nil)
+
+	ctx.JSON(http.StatusCreated, dbData)
 }
 
 func (a *Api) Login(ctx *gin.Context) {

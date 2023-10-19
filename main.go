@@ -41,7 +41,7 @@ func main() {
 	g.GET("/grimziks", api.GetGrimziks)
 	g.PUT("/sepulca/vaccinate", api.VaccinateSepulca)
 	g.PUT("/sepulca/rubber", api.RubberSepulca)
-	g.GET("/sepulcas", api.CreateSepulca)
+	g.GET("/sepulcas", api.GetAllSepulcas)
 
 	if err := g.Run(":8080"); err != nil {
 		log.Panic(err)

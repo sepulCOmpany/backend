@@ -4,17 +4,14 @@ import (
 	"fmt"
 
 	"github.com/sepulCOmpany/backend/internal/models"
+	"github.com/sirupsen/logrus"
 	"golang.org/x/crypto/bcrypt"
 )
 
-func (db *Db) CheckRole() {
-
-}
-
-func (db *Db) Register(user models.User) error {
+func (db *Db) Register(user models.User) (*models.UserWithoutPassword, error) {
 	hashPass, err := bcrypt.GenerateFromPassword([]byte(user.Password), bcrypt.DefaultCost)
 	if err != nil {
-		return fmt.Errorf("cannot get hash of password, err: %w", err)
+		return nil, fmt.Errorf("cannot get hash of password, err: %w", err)
 	}
 
 	user.Password = string(hashPass)
@@ -24,9 +21,24 @@ func (db *Db) Register(user models.User) error {
 		    registred_users (username, password, role_id)
 			VALUES (:username, :password, :role_id)
 	`
-
-	_, err = db.db.NamedExec(query, user)
-	return err
+	const queryGetLast = `
+		SELECT id, role_id, username
+		FROM registred_users
+				ORDER BY id DESC LIMIT 1
+			
+	`
+	var dbData models.UserWithoutPassword
+	tx := db.db.MustBegin()
+	_, err1 := db.db.NamedExec(query, user)
+	if err1 != nil {
+		logrus.Debug(err)
+	}
+	err2 := db.db.Get(&dbData, queryGetLast)
+	if err2 != nil {
+		logrus.Debug(err)
+	}
+	tx.Commit()
+	return &dbData, nil
 }
 
 func (db *Db) Login(user models.User) (*models.UserWithoutPassword, error) {
